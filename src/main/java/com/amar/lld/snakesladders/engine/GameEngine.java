@@ -29,7 +29,7 @@ public class GameEngine {
         gameState.setCurrentPlayer(player);
         gameState.setDiceSide(diceSide);
 
-        if(player.getPlayerState() == NONE){
+        if(player.getPlayerState() == PlayerState.NONE){
             if(CanStartGame(diceSide, player)){
                 player.setPlayerState(PlayerState.START_PLAYING);
                 return MoveOutcome.START;
@@ -42,7 +42,7 @@ public class GameEngine {
         }
 
         var postions = gameState.getPlayerPositions();
-        var currPos = postions.get(player.getId());
+        var currPos = postions.get(player.getId()) == null ? 0 : postions.get(player.getId());
         postions.put(player.getId(), currPos + diceSide);
 
         if(hasWonGame(player)){
@@ -61,8 +61,6 @@ public class GameEngine {
         if(player == null) 
             throw new NullPointerException();
         
-        gameState.setCurrentPlayer(player);
-
          var startRule = getRule(RuleType.NO_SIX_TO_START);
         if(!startRule.isPresent()){
             throw  new Exception("No start rule present");

@@ -43,6 +43,7 @@ public class Client {
             int diceSide = dice.roll();
             try{
                 result = engine.ExecuteMove(diceSide, currPlayer);
+                System.out.println("Player "+ currPlayer.getName() + " rolled a "+ diceSide + " and got outcome "+ result);
                 if(result == MoveOutcome.START){
                     continue;
                 }
