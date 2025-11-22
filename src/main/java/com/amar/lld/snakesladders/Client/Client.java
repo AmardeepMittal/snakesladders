@@ -8,11 +8,9 @@ import com.amar.lld.snakesladders.Rules.LandOnLadderRule;
 import com.amar.lld.snakesladders.Rules.LandOnSnakeRule;
 import com.amar.lld.snakesladders.Rules.NoSixToStartRule;
 import com.amar.lld.snakesladders.Rules.WonGameRule;
-import com.amar.lld.snakesladders.engine.GameEngine;
 import com.amar.lld.snakesladders.models.Board;
 import com.amar.lld.snakesladders.models.Dice;
 import com.amar.lld.snakesladders.models.Ladder;
-import com.amar.lld.snakesladders.models.MoveOutcome;
 import com.amar.lld.snakesladders.models.Player;
 import com.amar.lld.snakesladders.models.Snake;
 
@@ -33,36 +31,8 @@ public class Client {
         players.add(new Player("Player_1", "Player_1"));
         players.add(new Player("Player_2", "Player_2"));
 
-        var engine = new GameEngine(board, dice, players, rules);
-
-        MoveOutcome result = MoveOutcome.NONE;
-        var currPlayer = players.getFirst();
-        int currentPlayerIndex = 0;
-
-        while (result != MoveOutcome.WON){
-            int diceSide = dice.roll();
-            try{
-                result = engine.ExecuteMove(diceSide, currPlayer);
-                System.out.println("Player "+ currPlayer.getName() + " rolled a "+ diceSide + " and got outcome "+ result);
-                if(result == MoveOutcome.START){
-                    continue;
-                }
-
-                if(result == MoveOutcome.WON){
-                    break;
-                }
-
-                // Move to next player (with wraparound)
-                currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
-                currPlayer = players.get(currentPlayerIndex);
-            }
-            catch(Exception ex){
-                System.err.println(ex.getMessage());
-            }
-        }
-
-        System.out.println("Player "+ currPlayer.getName() + " won the game");
-
+        var game = new Game(board, dice, players);
+        game.startGame();
     }
 
     private static Board createBoard(int size){

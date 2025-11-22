@@ -14,7 +14,6 @@ import com.amar.lld.snakesladders.models.PlayerState;
 import com.amar.lld.snakesladders.models.RuleType;
 
 public class GameEngine {
-    private static final PlayerState NONE = null;
     private GameState gameState;
     private List<IRule> rules;
     public GameEngine(Board board, Dice dice, List<Player> players, List<IRule> rules){
