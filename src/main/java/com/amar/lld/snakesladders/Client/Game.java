@@ -14,18 +14,27 @@ public class Game {
     private GameEngine engine;
     private Dice dice;  
     private List<Player> players;
+    
+    // Original constructor - maintains backward compatibility
     public Game(Board board, Dice dice, List<Player> players) {
-     // Create rules list
+        this(board, dice, players, createDefaultRules());
+    }
+    
+    // New constructor - allows custom rules (Open for extension)
+    public Game(Board board, Dice dice, List<Player> players, List<IRule> rules) {
+        this.engine = new GameEngine(board, dice, players, rules);
+        this.dice = dice;
+        this.players = players;
+    }
+    
+    // Factory method for default rules
+    private static List<IRule> createDefaultRules() {
         List<IRule> rules = new ArrayList<>();
         rules.add(new NoSixToStartRule());
         rules.add(new LandOnSnakeRule());
         rules.add(new LandOnLadderRule());
         rules.add(new WonGameRule());
-        
-        // Use the rules list in your game setup
-        this.engine = new GameEngine(board, dice, players, rules);
-        this.dice = dice;
-        this.players = players;
+        return rules;
     }
 
     public void startGame(){

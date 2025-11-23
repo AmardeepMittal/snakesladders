@@ -6,5 +6,6 @@ public enum RuleType {
     REACHED_END,
     LAND_ON_SNAKE,
     LAND_ON_LADDER,
+    LAND_ON_COIN,
     WON_GAME
 }
