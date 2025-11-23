@@ -16,13 +16,7 @@ import com.amar.lld.snakesladders.models.Snake;
 
 public class Client {
     
-    public static void main(String[] args) {
-        // Create rules list
-        List<IRule> rules = new ArrayList<>();
-        rules.add(new NoSixToStartRule());
-        rules.add(new LandOnSnakeRule());
-        rules.add(new LandOnLadderRule());
-        rules.add(new WonGameRule());
+    public static void main(String[] args) {        
         
         // Use the rules list in your game setup
         var board = createBoard(100);
