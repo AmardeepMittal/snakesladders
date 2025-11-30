@@ -4,6 +4,7 @@ public class Player {
 	private String name;
 	private String id;
     private PlayerState playerState;
+	private int position;
 
 	public Player(String name, String id) {
 		this.name = name;
@@ -26,4 +27,12 @@ public class Player {
     public void setPlayerState(PlayerState state){
          playerState = state;
     }
+
+	public int getPosition() {
+		return position;
+	}
+	
+	public void setPosition(int position) {
+		this.position = position;
+	}
 }

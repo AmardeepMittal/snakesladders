@@ -3,44 +3,28 @@ package com.amar.lld.snakesladders.Client;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.amar.lld.snakesladders.Rules.*;
 import com.amar.lld.snakesladders.engine.GameEngine;
 import com.amar.lld.snakesladders.models.Board;
 import com.amar.lld.snakesladders.models.Dice;
 import com.amar.lld.snakesladders.models.MoveOutcome;
 import com.amar.lld.snakesladders.models.Player;
+import com.amar.lld.snakesladders.strategies.*;
 
 public class Game {
     private GameEngine engine;
     private Dice dice;  
     private List<Player> players;
     
-    // Original constructor - maintains backward compatibility
-    public Game(Board board, Dice dice, List<Player> players) {
-        this(board, dice, players, createDefaultRules());
-    }
-    
-    // New constructor - allows custom rules (Open for extension)
-    public Game(Board board, Dice dice, List<Player> players, List<IRule> rules) {
-        this.engine = new GameEngine(board, dice, players, rules);
+    public Game(Board board, Dice dice, List<Player> players, IGameStartStrategy gameStartStrategy, IWinningStrategy winningStrategy) {
+         this.engine = new GameEngine(board, players, gameStartStrategy, winningStrategy);
         this.dice = dice;
         this.players = players;
     }
     
-    // Factory method for default rules
-    private static List<IRule> createDefaultRules() {
-        List<IRule> rules = new ArrayList<>();
-        rules.add(new NoSixToStartRule());
-        rules.add(new LandOnSnakeRule());
-        rules.add(new LandOnLadderRule());
-        rules.add(new WonGameRule());
-        return rules;
-    }
-
     public void startGame(){
 
         MoveOutcome result = MoveOutcome.NONE;
-        var currPlayer = players.getFirst();
+        var currPlayer = players.get(0);
         int currentPlayerIndex = 0;
 
         while (result != MoveOutcome.WON){

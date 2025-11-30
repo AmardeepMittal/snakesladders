@@ -14,7 +14,5 @@ import lombok.Setter;
 @Setter
 public class GameState {
     private Board board;
-    private int diceSide;
     private Player currentPlayer;
-    private Map<String, Integer> playerPositions;
 }
