@@ -1,6 +1,5 @@
 package com.amar.lld.snakesladders.Client;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.amar.lld.snakesladders.engine.GameEngine;

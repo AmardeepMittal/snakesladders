@@ -1,9 +1,6 @@
 package com.amar.lld.snakesladders.engine;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
-
 import com.amar.lld.snakesladders.models.Board;
 import com.amar.lld.snakesladders.models.MoveOutcome;
 import com.amar.lld.snakesladders.models.Player;
